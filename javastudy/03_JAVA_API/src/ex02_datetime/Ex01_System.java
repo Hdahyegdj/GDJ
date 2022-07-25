@@ -4,7 +4,7 @@ public class Ex01_System {
 
 	public static void main(String[] args) {
 		
-		// 1. 타임스탬프(timestamp)
+		// 1. 타임스탬프(timestamp)           //중요
 		// 1970-01-01 0:00부터 1/1000초마다 증가하는 long type의 정수값
 		long timestamp = System.currentTimeMillis();
 		System.out.println(timestamp);
@@ -17,6 +17,7 @@ public class Ex01_System {
 		int total = 1 + 2 + 3 + 4 + 5;
 		long endTime = System.nanoTime();
 		System.out.println(total + "계산에 걸린 시간 : " + (endTime - beginTime) + "㎱");
+
 		
 		
 	}

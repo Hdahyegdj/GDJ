@@ -1,4 +1,4 @@
-package ex02_roop;
+package ex02_loop;
 
 public class Ex02_while {
 

@@ -6,10 +6,12 @@ public class Ex02_Date {
 
 	public static void main(String[] args) {
 		
-		// 클래스 명명 규칙
+		// 클래스 명명 규칙             //중요
 		// 패키지 다음에 마침표(.)를 적고 클래스명을 적는다.
 		
 		java.lang.System.out.println("Hello");
+		//--------까지 생략 가능(나머지는 반드시 기입해야함.
+		
 		
 		// 예외 규칙
 		// java.lang 패키지에 소속된 클래스들은 패키지를 생략할 수 있다.
