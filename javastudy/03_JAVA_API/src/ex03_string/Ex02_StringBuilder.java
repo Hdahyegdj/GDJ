@@ -60,8 +60,6 @@ public class Ex02_StringBuilder {
 		
 		
 		
-		
-		
 		//연습. 1 2 3 4 5 6 7 8 9 10 만들기
 		StringBuilder sbPaging = new StringBuilder();
 		for(int n= 1; n <= 10; n++) {

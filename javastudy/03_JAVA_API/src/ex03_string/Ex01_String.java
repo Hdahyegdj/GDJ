@@ -69,9 +69,9 @@ public class Ex01_String {
 		
 		// 4. 특정 위치의 문자(char)만 반환
 		// 특정 위치
-		// 인덱스(Index)라고 함      ㄱ         // 'a' : char 타입. "a" : string 타입  -> 둘은 전혀 다름
-		// 글자마다 부여된 정수값	 ㅣ
-		// 0으로 시작				 ㅡ	 ->여기가 중요
+		// 인덱스(Index)라고 함      )         // 'a' : char 타입. "a" : string 타입  -> 둘은 전혀 다름
+		// 글자마다 부여된 정수값	 }
+		// 0으로 시작				 )	 ->여기가 중요
 		System.out.println(name.charAt(0));		// 첫번째 글자 0
 		System.out.println(name.charAt(1));	
 		System.out.println(name.charAt(2));	
@@ -206,7 +206,7 @@ public class Ex01_String {
 			if(ch >= '0' && ch <= '9') {	
 				continue;
 			}
-			System.out.println(ch);				  //i에 길이를 입력하면 됨.
+			System.out.println(ch);				  //i에 길이를 입력하면 됨.(해당 방법을 주로 많이 사용)
 		}
 
 		
