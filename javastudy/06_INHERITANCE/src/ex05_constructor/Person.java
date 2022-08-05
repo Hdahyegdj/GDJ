@@ -6,4 +6,6 @@ public class Person {
 		System.out.println("Person의 생성");    
 	}
 	
+	
+	
 }
