@@ -2,6 +2,8 @@ package library;
 
 import java.util.Scanner;				// Scanner 자동완성으로 처리
 
+import quiz01_library.Book;
+
 public class Library {	
 	
 	private Scanner sc;

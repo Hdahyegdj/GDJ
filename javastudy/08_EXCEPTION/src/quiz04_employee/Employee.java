@@ -1,6 +1,6 @@
 package quiz04_employee;
 
-public class Employee {
+public class Employee {		// 추상메소드를 가졌기 때문에 추상클래스로 수정
 	
 	private int empNo;		// 사번
 	private String name;
@@ -31,7 +31,7 @@ public class Employee {
 	public String toString() {
 		return "Employee [empNo=" + empNo + ", name=" + name;
 	}
-	
+	public abstract int getPay();
 	
 	
 

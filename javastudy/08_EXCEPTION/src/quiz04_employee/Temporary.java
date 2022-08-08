@@ -14,7 +14,7 @@ public class Temporary extends Employee {
 	}
 
 	public void setHourPay(double hourPay) {
-		this.hourPay = hourpay;
+		this.hourPay = hourPay;
 	}
 
 	public int getWorkTimes() {
