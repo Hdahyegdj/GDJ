@@ -4,7 +4,7 @@ public class Regular extends Employee {
 	
 	private int salary;
 							
-	public Regular(int salary, String name, int salary) {			// 생성자
+	public Regular(int empNo, String name, int salary) {			// 생성자
 		super(empNo, name);
 		this.salary = salary;
 	}
