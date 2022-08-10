@@ -24,7 +24,7 @@ public class Main {
 	
 	public static void m2() {
 		try {
-			String input = "20, 21,,22, 23, 24, 25";	// ,, 오류 처리하기
+			String input = "20, 21, 22, 23, 24, 25";	// ,, 오류 처리하기
 			String[] inputs = input.split(",");			// ", " 분리
 			int[] ages = new int[inputs.length];
 			for(int i = 0; i < inputs.length; i++) {
