@@ -27,6 +27,7 @@ public class XMLWriter {
 		// 3. 표준 마크업 언어인 HTML의 확장 버전
 		// 4. 정해진 태그(<>) 외 사용자 정의 태크 사용
 		/*
+		 <products>	
 		 	<product>						
 		 		<number>100</number>		// 이런 요소 하나하나를 "Element"라고 부름.(크게 보면 product도)
 		 		<name>새우깡</name>
@@ -42,7 +43,7 @@ public class XMLWriter {
 		 		<name>홈런볼</name>
 		 		<price>3000</price>
 		 	</product>		 	
-		 	
+		 <products>			 	
 		 */
 		
 		try {
@@ -51,7 +52,11 @@ public class XMLWriter {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.newDocument();	//org.w3c.dom(웹 구성 요소를 문서로 처리할때 사용)
-			document.setXmlStandalone(true);
+			document.setXmlStandalone(true);	// Standalone="no" 제거(XMl문서에 고정으로 생성되는 내용 제거)
+			
+			// Document에 products 태그 추가
+			Element products = document.createElement("products");
+			document.appendChild(products);
 			
 			// 태그 생성
 			List<String> product1 = Arrays.asList("100", "새우깡", "1500");
@@ -71,7 +76,7 @@ public class XMLWriter {
 				name.setTextContent(line.get(2));
 				
 				// 태그 배치
-				document.appendChild(product);
+				products.appendChild(product);  // products 아래에 product가 있다.
 				product.appendChild(number);
 				product.appendChild(name);
 				product.appendChild(price);				
@@ -81,7 +86,8 @@ public class XMLWriter {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();	//java.xml
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty("encoding", "UTF-8");
-			transformer.setOutputProperty("indent", "true");
+			transformer.setOutputProperty("indent", "yes");		// 들여쓰기
+			transformer.setOutputProperty("doctype-public", "yes");	
 			
 			Source source = new DOMSource(document);
 			File file = new File("C:\\storage", "product.xml");
