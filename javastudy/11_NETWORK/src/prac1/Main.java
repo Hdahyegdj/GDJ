@@ -1,3 +1,4 @@
+
 package prac1;
 
 import java.io.BufferedReader;
@@ -48,6 +49,7 @@ public class Main {
 		} catch(MalformedURLException e) {
 			System.out.println("API 주소 오류");
 		} catch(IOException e) {
+			System.out.println(e.getMessage());   // 에러 메세지 표시
 			System.out.println("API 서버 오류");			
 		}
 	}
