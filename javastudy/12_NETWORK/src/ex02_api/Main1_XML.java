@@ -20,9 +20,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.sun.tools.classfile.Annotation.element_value;
 
 
-public class Main {
+
+public class Main1_XML {
 
 	// 요청
 	// 1. Request
@@ -445,14 +447,65 @@ public class Main {
 		
 		try {
 			
-			if(com)
-			
+			if(con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else {
+				reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			String line = null;
+			while((line = reader.readLine()) != null ) {
+				sb.append(line + "\n");
+			}
+		} catch(IOException e) {
+			System.out.println("응답 실패");
+		}
+		
+		// XML 파일 생성
+		File file = new File("C:\\storage", "api4.xml");
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+			writer.write(sb.toString());
+			writer.close();
+		} catch(IOException e) {
+			System.out.println("파일 생성 실패");
 		}
 		
 		
 	}
 	
 	public static void m8() {
+		
+		File file = new File("C:\\storage", "api4.xml");
+	
+		try {
+			
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(file);
+			
+			Element root = doc.getDocumentElement();
+			
+			StringBuilder sb = new StringBuilder();
+			
+			Node title = root.getElementsByTagName("title").item(0);
+			sb.append(title.getTextContent()).append("\n");
+			
+			NodeList dataList = root.getElementsByTagName("data");
+			for(int i = 0; i < dataList.getLength(); i++) {
+				Element data = (Element)dataList.item(i);
+				Node hour = data.getElementsByTagName("hour").item(0);
+				Node temp = data.getElementsByTagName("temp").item(0);
+				Node wfKor = data.getElementsByTagName("wfKor").item(0);
+				sb.append(hour.getTextContent()).append("시 ");
+				sb.append(temp.getTextContent()).append("도 ");
+				sb.append(wfKor.getTextContent()).append("\n ");
+			}
+			
+			System.out.println(sb.toString());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -501,29 +554,29 @@ public class Main {
 		
 		try {
 			
+			StringBuilder sb = new StringBuilder();
+			
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(file);
 			
 			Element root = doc.getDocumentElement(); 	// <current xmlns = "current"> 태그
 			
-			Element weather= (Element)root.getElementsByTagName("weather").item(0);
-			sb.append(weather.getAttribute("year") + "년")
-			
-			
-			
-			Node weather = (Element)root.getElementsByTagName("weather"), item(0);
-			weather getAttribute("year")
-			
-			
-			
-			System.out.println(root.getNodeName());
-			System.out.println(root.getAttribute("xmlns"));
+			Element weather= (Element)root.getElementsByTagName("weather").item(0); 	// <weather year="2022" month="08" day="18" hour="15">
+			sb.append(weather.getAttribute("year") + "년 ");
+			sb.append(weather.getAttribute("month") + "월 ");
+			sb.append(weather.getAttribute("day") + "일 ");
+			sb.append(weather.getAttribute("hour") + "시\n");
 			
 			NodeList locals = root.getElementsByTagName("local");
+			for(int i = 0; i < locals.getLength(); i++) {
+				Element local = (Element)locals.item(i);
+				sb.append(local.getTextContent() + " : ");
+				sb.append(local.getAttribute("ta") + "℃ ");
+				sb.append(local.getAttribute("desc") + "\n");
+			}
 			
-			
-			
+			System.out.println(sb.toString());
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -535,7 +588,7 @@ public class Main {
 			
 	
 	public static void main(String[] args) {
-	 m6();
+	 m10();
 
 	}
 

@@ -20,7 +20,7 @@ public class Server extends Thread {
 		try {
 			this.client = client;
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			out = new BufferedReader(new OutputStreamWriter(client.getOutputStream()));
+			out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -33,6 +33,11 @@ public class Server extends Thread {
 	
 	@Override
 	public void run() {
+		
+		InetSocketAddress address = null;
+		
+		try {
+		
 		
 			while(true) {
 				String message = in.readLine();
@@ -49,19 +54,14 @@ public class Server extends Thread {
 			}  // while(true)
 			
 			} catch(IOException e) {
-			e.printStackTrace();
+				e.printStackTrace();
 			}
 			
 			// Lisr<Server> servers에서 등록된 서버 제거
 			System.out.println(address.getHostName() + " 채팅 종료");
 			ServerMain.servers.remove(this);
 			System.out.println("현재 접속 중인 클라이언트 " + ServerMain.servers.size() + "명");
-			
 
-		
 	}
-	
-	
-	
 
 }

@@ -3,6 +3,7 @@ package prac2;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ServerMain {
 		}
 	}
 	
-	
+
 	public static void main(String[] args) {
 		
 		ServerSocket server = null;
@@ -57,6 +58,7 @@ public class ServerMain {
 					e.printStackTrace();
 				}
 			}
+		
 		}
 
 }
