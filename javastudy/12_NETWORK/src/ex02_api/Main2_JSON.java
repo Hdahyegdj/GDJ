@@ -407,7 +407,7 @@ public class Main2_JSON {
 	
 	
 	public static void main(String[] args) {
-		m8();
+		m6();
 
 	}
 
