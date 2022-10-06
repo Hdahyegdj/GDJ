@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">    <!-- 분리된 파일 링크 걸기 -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="https://gdu.co.kr/main/main.html">
+                <img alt="구디로고" src="https://gdu.co.kr/images/main/logo.png">
+            </a>
+        </header>
+        <section>
+            <form method="POST" action="/">   <!-- 로그인 화면이므로 id/pw를 암호화-->
+                <div class="gubun">
+                    <span class="gubun_desc"> ※회원구분을 위해 체크해 주세요</span>    <!-- div대신 span 사용하는 이유 : 인라인요소 사용해서 줄이 바뀌지 않음(ex. input) -->
+                    <label for="student">
+                        <input type="radio" name="gubun" value="student" id="student">수강생   <!-- 1. student는 서버 전송 값. 21행 student는 2.student임-->
+                    </label>
+                    <label for="member">
+                        <input type="radio" name="gubun" value="member" id="member">일반회원  <!-- 둘의 메인 속성이 동일해야 둘중하나만 선택됨 -->
+                    </label>
+                </div>
+                <div class="input_area">    <!-- 여기가 실제 id/pw입력 부분 -->
+                    <input type="text" id="id" placeholder="아이디">
+                    <div></div>
+                    <input type="password" id="pw" placeholder="●●●●">
+                    <div></div>
+                    <button class="btn_signin">Sign In</button>
+                </div>
+            </form>
+        </section>
+        <footer>    
+            <div class="join">
+                <p class="title">아직 회원이 아닌가요?</p>
+                <p class="desc">가입하면 다양한 서비스 이용이 가능합니다.</p>
+                <a class="btn_footer" href="javascript:void(0)">Sign Up</a>  <!-- javascript:void(0) : 아무연결 안하기 -->
+            </div>
+            <div class="find">
+                <p class="title">아이디/비밀번호를 잊으셨나요?</p>
+                <p class="desc">간단하게 아이디/비밀번호를 찾을 수 있습니다.</p>
+                <a class="btn_footer" href="javascript:void(0)">Find ID/PW</a>
+            </div>
+        </footer>
+    </div>
+    
+</body>
+</html>

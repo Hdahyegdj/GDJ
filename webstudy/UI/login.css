@@ -1,0 +1,74 @@
+* {                         /* 모든 요소는 각각의 padding, margin값이 있기 때문에 초기에 동일 값으로 통일 */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+.container {
+    width: 460px;           /* 구역 지정 */
+    margin: 0 auto;         /* 상하 : 0, 좌우 : auto */ /* margin : header를 내림, padding : header 위의 여백을 줌 */
+}
+header {
+    text-align: center;     /* 가운데 정렬(header값 : 로고이미지) / 인라인 요소 : text-align사용, 블록 요소 : margin, auto 사용 */
+    padding: 100px 0 50px;  /* 상단 : 100, 좌우 : 0, 하단 : 50 */ /* margin : header를 내림, padding : header 영역자체를 키움 */
+}
+.gubun_desc {
+    font-weight: 900;
+}
+.gubun {
+    margin-bottom: 5px;      /* 회원구분을 위해... 문구 하단 여백 주기 */
+}
+.input_area input {        
+    width: 100%;              /* id/pw 입력 창 부모 크기만큼(100%) 늘림 */
+    height: 50px;             /* id/pw 입력 창 높이 */
+    padding-bottom: 0 10px;
+    margin-bottom: 5px;       /* id/pw 창 사이 간격 넓힘 */
+    border: 2px solid #007700;      /* id/pw 입력창 border값 및 색상 */
+    outline: 0;
+}
+.input_area input:focus {    /* id/pw 창 선택 시 색상 변경 */
+    border: 2px solid #FF8800;
+}
+.btn_signin {
+    width: 100%;
+    height: 60px;
+    margin: 15px 0;
+    background-color: #007700;
+    color: #FFFFFF;
+    font-weight: 900;
+    text-align: center;     /* 세로정렬 */
+    line-height: 60px;
+    border: 0;              /* Sign In 창의 테두리 삭제 */
+    font-size: 20px;        /* Sign In 글자 크기 변경 */
+}
+footer {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;   /* 각각의 박스 사이에 공백주기 */
+    text-align: center;               /* 센터에 들어가는 text 전부 가운데 정렬 */
+}
+.join, .find {
+    width: 49%;
+}
+.title {
+    font-size: 12px;
+    font-weight: bold;
+}
+.desc {
+    font-size: 10px;
+    color: #777777;
+}
+.btn_footer {
+    display: block;         /* sign up과 find id/pw 상자 블록 */
+    width: 200px;
+    height: 50px;
+    line-height: 50px;      /* 세로 가운데 정렬 */
+    background-color: #007777;
+    color: #FFFFFF;
+    margin: 10px auto;      /* 가운데 정렬(블록으로 설정했으므로 text-align이 아닌 margin값 : auto으로 설정)*/
+}
