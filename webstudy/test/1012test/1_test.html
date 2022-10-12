@@ -1,0 +1,15 @@
+<div>
+    <input type="text" id="user_id">
+    <span id="msg_id"></span>
+</div>
+<script>
+    document.getElementById('user_id').onblur = function(event) {     // 입력 후 포커스가 나갔을 때 검사
+        /* 5-20자, 소문자&숫자&-&_ */
+        var regId = /^[a-z][a-z0-9]{3,19}$/;
+        if(regId.test(this.value)) {
+            document.getElementById('msg_id').textContent = '멋진 아이디네요'
+        } else {
+            document.getElementById('msg_id').textContent = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
+        }
+    }
+</script>

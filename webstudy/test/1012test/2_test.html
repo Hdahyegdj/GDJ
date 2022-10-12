@@ -1,0 +1,37 @@
+<!-- 1) 고전이벤트 -->
+<button id="btn">전송</button>
+    <script>
+        function fn1() {
+            alert('전송합니다.');
+        }
+        function fn2() {
+            fn1();
+        }
+        document.getElementById('btn').onclick = fn2;  
+    </script>
+   
+<hr>
+
+<!-- 2) 표준이벤트 -->
+<button id="btn">전송</button>
+   <script>
+       function fn1() {
+           alert('전송합니다.');
+       }
+       document.getElementById('btn').addEventListener('click', fn1)
+   </script> 
+   
+<hr>
+
+<!-- 3) 인라인 이벤트 -->
+<button id="btn" onclick="fn2()">전송</button>
+    <script>
+        function fn1() {
+            alert('전송합니다.');
+        }
+        function fn2() {
+            fn1();
+        }
+    </script>
+
+

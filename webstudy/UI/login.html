@@ -27,10 +27,10 @@
                 </div>
                 <div class="input_area">    <!-- 여기가 실제 id/pw입력 부분 -->
                     <input type="text" id="id" placeholder="아이디">
-                    <div></div>
+                    <div id="id"></div>       <!-- 올바른 아이디 값 입력 alert를 위해 id값 지정-->
                     <input type="password" id="pw" placeholder="●●●●">
                     <div></div>
-                    <button class="btn_signin">Sign In</button>
+                    <button id="btn_signin" class="btn_signin">Sign In</button>     <!-- pw미입력 후, Sign In 버튼 클릭 시, alert 창 (id="btn_signin") -->
                 </div>
             </form>
         </section>
@@ -47,6 +47,7 @@
             </div>
         </footer>
     </div>
+    <script src="login.js"></script>             <!-- 분리한 js 파일-->
     
 </body>
 </html>

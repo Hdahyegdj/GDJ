@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<a href="/01_Servlet/RedirectServlet1?a=1">링크1</a>	  <!-- request를 보내주지 않음:redirect (서버 전달이 안됨으로 null값 표시) -->
+	
+	<hr>
+	
+	<a href="/01_Servlet/ForwardServlet1?a=1">링크2</a>		  <!-- request를 보내줌:forward (서버 내 이동임으로 파라미터값이 안보임(서버내 전달)) -->
+
+</body>
+</html>

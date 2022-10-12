@@ -1,0 +1,10 @@
+<form id="frm" action="https://search.naver.com/search.naver" >
+    <input type="text" name="query" id="query">   
+    <input type="submit" value="네이버검색" id="btn">     
+</form>
+<script>
+    document.getElementById('btn').onclick = function(event){
+        alert('검색어는 ' + document.getElementById('query').value + '입니다.');
+    }
+</script>
+
