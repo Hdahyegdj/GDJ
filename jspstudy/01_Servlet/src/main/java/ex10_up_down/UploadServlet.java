@@ -59,7 +59,7 @@ public class UploadServlet extends HttpServlet {
 				/* 업로드 할 경로 */	 realPath,
 				/* 최대 크기 */		     1024 * 1024 * 10,
 				/* 인코딩 */		     "UTF-8",
-				/* 파일명 중복 처리 */	 new DefaultFileRenamePolicy()				 
+				/* 파일명 중복 처리 */	 new DefaultFileRenamePolicy()			// 파일명 뒤에 번호를 붙이는 방식		 
 				);
 		
 		// 5. 업로드 결과
@@ -81,8 +81,8 @@ public class UploadServlet extends HttpServlet {
 		out.println("<h3>저장 파일명 : " + filesystemName + "</h3>");
 		out.println("<h3>파일 크기 : " + strSize + "</h3>");
 		out.println("<h3>최종 수정일 : " + strLastModified + "</h3>");
+		out.println("<a href=\"/01_Servlet/FileListServlet\">파일목록</a>");
 		out.close();
-		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
