@@ -22,7 +22,7 @@ public class BoardAddService implements BoardService {
 		board.setContent(content);
 		
 		// DB로 Board 보냄(삽입)
-		int result = BoardDao.getInstance().insertBoard(board);		// result 결과가 '0'이면 성공, '1'이면 실패
+		int result = BoardDao.getInstance().insertBoard(board);		// result 결과가 '1'이면 성공, '0'이면 실패
 		
 		// 이번에는 삽입 성공/실패 처리는 하지 않음
 		System.out.println("삽입 결과 : " + result);

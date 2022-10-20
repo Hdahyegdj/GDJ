@@ -1,57 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />    
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${board.board_no}번 게시글</title>
+<title>${board.boardNo}번 게시글</title>
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script>
 	
 	$(document).ready(function(){
 		
 		$('#btn_edit').click(function(event){
-			location.href = '${contextPath}/board/edit.do?board_no=${board.board_no}'
+			location.href = '${contextPath}/board/edit.do?boardNo=${board.boardNo}';
 		});
 		
 		$('#btn_remove').click(function(event){
 			if(confirm('게시글을 삭제할까요?')){
-				location.href = '${contextPath}/board/remove.do?board_no=${board.board_no}';
+				location.href = '${contextPath}/board/remove.do?boardNo=${board.boardNo}';
 			} else {
 				alert('취소되었습니다.');
 			}
 		});
-				
+		
 		$('#btn_list').click(function(event){
-			location.href = '${contextPath}/board/list.do';		
+			location.href = '${contextPath}/board/list.do';
 		});
 		
 	});
-	
+
 </script>
 </head>
 <body>
 
-	<h1>게시글 상세 보기</h1>
+	<h1>${board.title}</h1>
+	<pre>${board.content}</pre>		<!-- pre태그로 블락 라벨임으로 div와 동일하게 줄바꿈 실행됨 -->
+	<div>${board.createDate}</div>
+
+	<hr>
+	
 	<div>
-		게시글 번호 : ${board.board_no}
-	</div>
-	<div>
-		게시글 제목 : ${board.title}
-	</div>
-	<div>
-		<pre>${board.content}</pre>			<!-- 특별한 msg 없이 바로 content 나올 수 있게 -->
-	</div>
-	<div>
-		작성일자 : ${board.create_date}
-	</div>
-	<div>
-		<input type="button" value="편집" id="btn_edit"> 
+		<input type="button" value="편집" id="btn_edit">
 		<input type="button" value="삭제" id="btn_remove">
 		<input type="button" value="목록" id="btn_list">
 	</div>
-
+	
 </body>
 </html>

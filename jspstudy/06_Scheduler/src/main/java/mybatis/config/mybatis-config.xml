@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!-- db.properties 파일 경로 설정(xml은 .(package)가 아닌 / 사용하여 설정) --> 	<!-- db.properties에 있는 값이 ${ }에 해당하는 변수 처리 됨. -->
+	<properties resource="mybatis/config/db.properties"></properties>
+
+	<!-- snake_case(_로 연결 : DB) to camelCase(Java) -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- domain.Student to Student(본래 domain.Board를 Board로 부르도록 설정 -->
+	<typeAliases>	
+		<typeAlias type="domain.Student" alias="Student" />
+	</typeAliases>
+
+	<environments default="development">
+    	<environment id="development">
+	      	<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>			
+		        <property name="url" value="${url}"/>
+		        <property name="username" value="${username}"/>
+		        <property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="mybatis/mapper/student.xml"/>		<!-- mybatis.mapper > board 경로 -->
+	</mappers>
+	
+</configuration>

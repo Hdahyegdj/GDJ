@@ -19,6 +19,14 @@
 			location.href = '${contextPath}/board/write.do';
 		});
 		
+		$('#remove_link').click(function(event){
+			if(!confirm('삭제할까요?')){	// ! 대신에 우측 코드 사용 가능    if(confirm('삭제할까요?')==false){
+				alert('취소되었습니다.');
+				event.preventDefault();		// <a> 태그의 기본 이벤트는 링크 이동이므로 preventDefault()를 통해서 링크 이동이 막힘
+				return;
+			}
+		});
+		
 	});
 	
 </script>
@@ -47,7 +55,7 @@
 						<td><a href="${contextPath}/board/detail.do?board_no=${board.board_no}">${board.title}</a></td>		<!-- 해당 제목 클릭해서 넘어가는 변수처리, 상세보기는 파라미터 번호를 넣어줘야함 -->
 						<td>${board.create_date}</td>
 						<td>
-							<a href=""><i class="fa-solid fa-x"></i></a>      <!-- font awsoom에서 아이콘 검색  -->
+							<a id="remove_link" href="${contextPath}/board/remove.do?board_no=${board.board_no}"><i class="fa-solid fa-x"></i></a>      <!-- font awsoom에서 아이콘 검색  -->
 						</td>
 					</tr>
 				</c:forEach>
