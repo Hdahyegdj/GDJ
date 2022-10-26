@@ -85,18 +85,5 @@ public class BoardDao {
 		ss.close();
 		return result;
 	}
- 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

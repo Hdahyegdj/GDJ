@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		안녕. 난 Spring Bean Configuration File이야.
+		난 Bean을 만드는 xml이다.
+		내가 만든 Bean은 컨테이너(Container)에 보관되지.
+	 -->
+	 
+	 <!-- 
+	 	디폴트 생성자 + setter(property 태그 사용)    // id는 가져올 Main 클래스의 get bean의 이름(반드시 통일해야함)
+	   												  // value 속성을 사용(byte, short, int, long, float, double, boolean, char, String), ref 속성 사용(참조타입)
+	  -->
+	  <bean class="com.gdu.app01.xml01.Calculator" id="calculator"></bean>
+	  <bean id="haksang" class="com.gdu.app01.xml01.Student">
+	  	<property name="name">
+	  		<value>홍길동</value>
+	  	</property>
+	  	<property name="school">
+	  		<value>가산대학교</value>
+	  	</property>
+	  	<property name="calculator">
+	  		<ref bean="calculator" />	
+	  	</property>
+	  </bean>
+
+</beans>
