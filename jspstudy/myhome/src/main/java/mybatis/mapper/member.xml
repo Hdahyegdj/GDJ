@@ -14,5 +14,17 @@
 		 WHERE ID = #{id} AND PW = #{pw}
 	</select>
 	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+			(MEMBER_NO, ID, PW, NAME, EMAIL, REGISTED_DATE)
+		VALUES
+			(MEMBER_SEQ.NEXTVAL, #{id}, #{pw}, #{name}, #{email}, TO_CHAR(SYSDATE, 'yyyy-mm-dd'))
+	</insert>
+	
+	<delete id="deleteMember" parameterType="int">
+		DELETE
+		  FROM MEMBER
+		 WHERE MEMBER_NO = #{memberNo}		<!-- 이 자리에서만 #(변수 값 앞 뒤로 ''를 붙여줌)을 $(수치데이터(''가 붙지 않고 변수값만 그대로 전달))로 사용할 수 있다. -->
+	</delete>
 	
 </mapper>

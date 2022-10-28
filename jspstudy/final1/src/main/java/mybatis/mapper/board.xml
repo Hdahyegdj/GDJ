@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.board">
+
+	<!-- 1. 회원목록 -->
+	<select id="detail" resultType="Board">
+		SELECT NO, WRITER, TITLE, CONTENT, IP, HIT, CREATE_DATE, MODIFY_DATE
+		  FROM BOARD
+		 ORDER BY NO DESC
+	</select>
+	
+	<!-- 2. 회원수 -->
+	<select id="selectAllBoardCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM BOARD
+	</select>
+	
+	<!-- 3. 회원상세 -->
+	<select id="selectBoardList" parameterType="int" resultType="Board">
+		SELECT NO, WRITER, TITLE, CONTENT, IP, HIT, CREATE_DATE, MODIFY_DATE
+		  FROM BOARD
+		 WHERE NO = #{boardNo}
+	</select>
+	
+	<!-- 4. 회원등록 -->
+	<insert id="insertPage" parameterType="Board">
+		INSERT INTO BOARD
+			(NO, WRITER, TITLE, CONTENT, IP, HIT, CREATE_DATE, MODIFY_DATE)
+		VALUES
+			(MEMBER_SEQ.NEXTVAL, #{writer}, #{title}, #{content}, #{ip}, #{hit}, #{create_date}, #{modify_date})
+	</insert>
+	
+	<!-- 5. 회원수정 -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE MEMBER
+		   SET WRITER = #{writer}
+		     , TITLE = #{title}
+		     , CONTENT = #{content}
+		     , IP = #{ip}
+		     , HIT = #{hit}
+		     , CREATE_DATE = #{create_date}
+		     , MODIFY_DATE = #{modify_date}
+		 WHERE no = #{no}
+	</update>
+	
+	<!-- 6. 회원삭제 -->
+	<delete id="deleteBoard" parameterType="int">		
+		DELETE
+		  FROM BOARD
+		 WHERE BOARD_NO = #{boardNo}
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
