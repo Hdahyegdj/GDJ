@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<a href="${contextPath}/board/detail">게시판</a>		// controller에 있는 mapping값(board폴더에 detail.jsp를 의미하는 것이 아님)
+	
+	<hr>
+	
+	<a href="${contextPath}/notice/datail">공지사항</a>
+
+</body>
+</html>
