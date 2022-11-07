@@ -19,7 +19,7 @@
 		
 		// 서브밋
 		$('#frm_board').submit(function(event){
-			if($('#name').val() == '' || $('#tel').val() == '' || $('#addr').val() == '' ){
+			if($('#name').val() == '' || $('#tel').val() == '' || $('#addr').val() == '' || $('#email').val() == ''){
 				alert('이름, 전화, 주소는 필수입니다.');
 				event.preventDefault();
 				return;

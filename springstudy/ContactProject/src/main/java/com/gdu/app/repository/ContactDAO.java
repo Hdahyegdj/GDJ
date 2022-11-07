@@ -43,14 +43,15 @@ public class ContactDAO {
 	}
 	
 	
+	// 1. list
 	public List<ContactDTO> selectAllContacts() {
-		List<ContactDTO> contacts = new ArrayList<ContactDTO>();
+		List<ContactDTO> list = new ArrayList<>();
 		try {
 			con = getConnection();
 			sql = "SELECT NO, NAME, TEL, ADDR, EMAIL, NOTE FROM CONTACT ORDER BY NO DESC";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				ContactDTO contact = new ContactDTO();
 				contact.setNo(rs.getInt(1));
 				contact.setName(rs.getString(2));
@@ -60,21 +61,23 @@ public class ContactDAO {
 				contact.setNote(rs.getString(6));
 				list.add(contact);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return contacts;
+		return list;
 	}
 	
-	public ContactDTO selectContactByNo(int contact_no) {
+	
+	// 2. view
+	public ContactDTO selectContactByNo(int no) {
 		ContactDTO contact = null;
 		try {
 			con = getConnection();
-			sql = "SELECT CONTACT_NO, NAME, TEL, ADDR, EMAIL, NOTE";
+			sql = "SELECT CONTACT_NO, NAME, TEL, ADDR, EMAIL, NOTE FROM CONTACT WHERE NO = ?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, contact_no);
+			ps.setInt(1, no);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				contact = new ContactDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
@@ -87,23 +90,65 @@ public class ContactDAO {
 		return contact;
 	}
 	
+	// 3. insert
+		public int insertContact(ContactDTO contact) {
+			int result = 0;
+			try {
+				con = getConnection();
+				sql = "INSERT INTO CONTACT VALUES (CONTACT_SEQ.NEXTVAL, ?, ?, ?, ?, ?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, contact.getName());
+				ps.setString(2, contact.getTel());
+				ps.setString(3, contact.getAddr());
+				ps.setString(4, contact.getEmail());
+				ps.setString(5, contact.getNote());
+				result = ps.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+			return result;
+		}
+		
+	// 4. update
+	public int updateContact(ContactDTO contact) {
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "UPDATE CONTACT SET NAME = ?, TEL = ?, ADDR = ?, EMAIL = ?, NOTE = ? WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, contact.getName());
+			ps.setString(2, contact.getTel());
+			ps.setString(3, contact.getAddr());
+			ps.setString(4, contact.getEmail());
+			ps.setString(5, contact.getNote());
+			ps.setInt(6, contact.getNo());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+	
+	// 5. delete
+	public int deleteContact(int no) {
+		int result = 0;
+		try {
+			con = getConnection();
+			sql = "DELETE FROM CONTACT WHERE NO = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

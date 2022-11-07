@@ -1,14 +1,15 @@
 package com.gdu.app.service;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import com.gdu.app.domain.ContactDTO;
+import org.springframework.ui.Model;
 
 public interface ContactService {
 	
-	public List<ContactDTO> findAllContacts();
-	public ContactDTO findContactByNo(int contact_no);
-	public int saveContact(ContactDTO contact);
-	public int modifyContact(ContactDTO contact);
-	public int removeContact(int contact_no);
+	public void findAllContacts(Model model);
+	public void findContactByNo(Model model);
+	public void register(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public void modify(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public void remove(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
