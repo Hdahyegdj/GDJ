@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper의 namespace를 Mapper Interface로 지정해 준다. -->
+<!-- namespace="mapper의 패키지 경로" / com.gdu.app10.mapper의 BoardMapper로 바꿔줘야함 -->
+<mapper namespace="com.gdu.app11.mapper.EmpMapper">		<!-- mapper 패키지 상에서 동일한 인터페이스로 설정 -->
+
+	<!-- employees와 departments의 조인을 위한 resultMap -->
+	<resultMap type="DeptDTO" id="DeptMap">
+		<result column="DEPARTMENT_ID" property="departmentId" />
+		<result column="DEPARTMENT_NAME" property="departmentName" />
+		<result column="MANAGER_ID" property="managerId" />
+		<result column="LOCATION_ID" property="locationId" />
+	</resultMap>
+	<resultMap type="EmpDTO" id="EmpMap">
+		<result column="EMPLOYEE_ID" property="employeeId" />
+		<result column="FIRST_NAME" property="firstName" />
+		<result column="LAST_NAME" property="lastName" />
+		<result column="EMAIL" property="email" />
+		<result column="PHONE_NUMBER" property="phoneNumber" />
+		<result column="HIRE_DATE" property="hireDate" />
+		<result column="JOB_ID" property="jobId" />
+		<result column="COMMISSION_PCT" property="commissionPct" />
+		<result column="SALARY" property="salary" />
+		<result column="MANAGER_ID" property="managerId" />
+		<collection resultMap="DeptMap" property="deptDTO"></collection>
+	</resultMap>
+	
+	
+	<select id="selectAllEmployeesCount" resultType="int">		<!-- 실제로 "selectAllEmployeesCount"를 부르는 건 9행 EmpMapper -->
+		SELECT COUNT(*)
+		  FROM EMPLOYEES
+	</select>
+	
+	<!-- EmpMapper의 selectEmployeesByPage(int start, int end) int값이 각각 param1, param2 값 -->
+	<select id="selectEmployeesByPage" parameterType="Map" resultMap="EmpMap">		<!-- resultMap="EmpMap"는 18g해의 resultMap에서 가져옴 -->	<!-- 파라미터타입이 있지만 무시하고 미작성(EmpMapper에서 int 두개로 나누어 놓았기 때문) -->	
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		          FROM (SELECT E.*, D.DEPARTMENT_NAME, D.LOCATION_ID
+		                  FROM DEPARTMENTS D RIGHT OUTER JOIN EMPLOYEES E	  <!-- 부서이름이 없는 사원이 있으므로 모든 사원 정보를 가져오기 위해서 오른쪽 외부조인을 사용해야함 -->
+		                    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+		                  ORDER BY HIRE_DATE DESC) A) B
+		 WHERE B.RN BETWEEN #{begin} AND #{end}		
+		 												
+	</select>
+	
+	<select id="selectFindEmployeesCount" parameterType="Map" resultType="int">		<!-- parameterType에는 칼럼과 쿼리가 들어있음 -->
+			SELECT COUNT(*)
+		  	  FROM EMPLOYEES E
+			  <where>
+				 <if test="column=='EMPLOYEE_ID' or column=='E.DEPARTMENT_ID'">${column} = #{query}</if>		<!-- list.jsp에서 id이름을 column으로 주었기 때문에 동일하게 -->
+	
+				 <if test="column=='LAST_NAME' or column=='FIRST_NAME' or column=='PHONE_NUMBER'">${column} LIKE '%' || #{query} || '%'</if>	<!-- '%' : 만능문자, || : 연결문자 -->
+			     
+			     <if test="column=='HIRE_DATE'">${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{end}, 'yyyy-mm-dd')</if>
+		  		 <if test="column=='SALARY'">${column} BETWEEN #{start} AND #{stop}</if>
+		     </where>
+		     <!--
+				WHERE #{column} = #{query}   #{}는 작은 따옴표(')로 묶어서 값을 치환
+		     	WHERE 'EMPLOYEE_ID' = '150'  잘못된 사용
+		     	
+		     	WHERE ${column} = #{query}   ${}는 그냥 치환
+				WHERE EMPLOYEE_ID = '150'    정상 동작
+			-->
+	</select>
+	
+	<select id="selectFindEmployees" parameterType="Map" resultMap="EmpMap">
+		SELECT B.*
+		  FROM (SELECT ROWNUM AS RN, A.*
+		          FROM (SELECT E.*, D.DEPARTMENT_NAME, D.LOCATION_ID
+		                  FROM DEPARTMENTS D RIGHT OUTER JOIN EMPLOYEES E
+		                    ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+		               <where>
+		                   <if test="column=='EMPLOYEE_ID' or column=='E.DEPARTMENT_ID'">${column} = #{query}</if>
+		                   <if test="column=='LAST_NAME' or column=='FIRST_NAME' or column=='PHONE_NUMBER'">${column} LIKE '%' || #{query} || '%'</if>
+		                   <if test="column=='HIRE_DATE'">${column} BETWEEN TO_DATE(#{start}, 'yyyy-mm-dd') AND TO_DATE(#{end}, 'yyyy-mm-dd')</if>
+		                   <if test="column=='SALARY'">${column} BETWEEN #{start} AND #{stop}</if>
+		               </where>
+		                 ORDER BY HIRE_DATE DESC) A) B
+		 WHERE B.RN BETWEEN #{begin} AND #{end}
+	</select>
+	
+	
+</mapper>
