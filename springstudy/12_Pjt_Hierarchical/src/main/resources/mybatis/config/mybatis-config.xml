@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!-- snake_case(_로 연결 : DB) to camelCase(Java) -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- com.gdu.app11.domain.BoardDTO to Board(본래 com.gdu.app09.domain.BoardDTO를 Board로 부르도록 설정 -->
+	<typeAliases>	
+		<typeAlias type="com.gdu.app12.domain.BbsDTO" alias="BbsDTO" />
+	</typeAliases>
+	
+</configuration>

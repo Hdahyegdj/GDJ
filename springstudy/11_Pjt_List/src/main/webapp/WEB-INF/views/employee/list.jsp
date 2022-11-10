@@ -42,6 +42,7 @@
 </style>
 <script src="${contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
+
 	$(document).ready(function(){
 		// area1, area2 표시
 		// 초기 상태 : area1, area2 둘 다 숨김
@@ -59,6 +60,28 @@
 				$('#area2').css('display', 'none');
 			}
 		});
+		
+		// 자동 완성(keyup : 한글자 기입 시 표시)
+		$('#email').keyup(function(){
+			$('#auto_complete').empty();
+			$.ajax({
+				/* 요청 */
+				type: 'get',
+				url: '${contextPath}/emp/autoComplete',
+				data: 'param=' + $(this).val(),
+				/* 응답(받아오는 데이터는 json을 사용) */
+				dataType: 'json',
+				success: function(resData){
+					if(resData.status == 200){
+						$.each(resData.list, function(i, emp){		  /* $.each(배열, funciton(인덱스, 요소)) */
+							$('#auto_complete')
+							.append($('<option>').val(emp["email"]));
+						});
+					}
+				}
+			});
+		});
+		
 	});
 </script>
 </head>
@@ -90,6 +113,14 @@
 			</span>
 		</form>
 	</div>
+
+	<div>
+		<label for="email">이메일</label>
+		<input type="text" id="email" name="email" list="auto_complete">
+		<datalist id="auto_complete"></datalist>		<!-- datalist는 목록상자 생성해줌 -->
+	</div>
+
+	<hr>
 
 	<div>
 		<table>

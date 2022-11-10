@@ -83,5 +83,31 @@
 		 WHERE B.RN BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<select id="selectAutoCompleteList" parameterType="String" resultType="EmpDTO">	<!-- DISTINCT : 중복제거 -->
+		SELECT DISTINCT EMAIL
+		  FROM EMPLOYEES
+		 WHERE EMAIL LIKE CONCAT(#{param}, '%') 	<!-- oracle 전용이며, 3개 이상은 톰캣을 2개 사용해야함 -->  <!-- WHERE EMAIL LIKE #{param} || '%'와 동일(sql 사용불가), -->
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

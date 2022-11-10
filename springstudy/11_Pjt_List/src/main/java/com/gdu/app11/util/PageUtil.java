@@ -41,35 +41,63 @@ public class PageUtil {
 		// beginPage, endPage 계산
 		beginPage = ((page - 1) / pagePerBlock) * pagePerBlock + 1;
 		endPage = beginPage + pagePerBlock - 1;
-		if(endPage > totalPage) {	  // 전체 페이지가 11인데, 끝 페이지가 11보다 클 경우
-			endPage = totalPage;
-		}
+		//if(endPage > totalPage) {	  // 전체 페이지가 11인데, 끝 페이지가 11보다 클 경우
+		//	endPage = totalPage;
 		
 	}
 
 	public String getPaging(String path) {
+		
 		StringBuilder sb = new StringBuilder();
+		
+		// 1. path에 파라미터가 없는 경우
+		//		/emp/list
+		//		/emp/list?page=1	(page 앞에 ?를 사용)
+		
+		// 2. path에 파라미터가 있는 경우
+		//		/emp/search?column=EMPLOYEE_ID&query=150
+		//		/emp/search?column=EMPLOYEE_ID&query=150&page=1	   (page 앞에 &를 사용)
+		
+		if(path.contains("?")) {
+			path += "&";
+		} else {
+			path += "?";
+		}
+		
+		sb.append("<div class=\"paging\">");
+
 			
-			// 이전블록 : 1block이 아니면 이전블록이 있다
-			if(beginPage != 1) {
-				sb.append("<a href=\"" + path + "?page=" + (beginPage-1) + "\">◀</a>");
-			}
-			
-			// 페이지번호 : 현재 페이지는 링크가 없다
-			for(int p = beginPage; p <= endPage; p++) {
+		// 이전블록 : 1block이 아니면 이전블록이 있다
+		if(beginPage != 1) {
+			sb.append("<a class=\"lnk\" href=\"" + path + "page=" + (beginPage - 1) + "\">◀</a>");
+		} else {
+			sb.append("<span class=\"hidden\">◀</span>");
+		}
+		
+		// 페이지번호 : 현재 페이지는 링크가 없다
+		int endPage = beginPage + pagePerBlock - 1;
+		for(int p = beginPage; p <= endPage; p++) {
+			if(p <= totalPage) {
 				if(p == page) {
-					sb.append(p);
+					sb.append("<span class=\"now_page\">" + p + "</span>");
 				} else {
-					sb.append("<a href=\"" + path + "?page=" + p + "\">" + p + "</a>");
-				}
+					sb.append("<a class=\"lnk\" href=\"" + path + "page=" + p + "\">" + p + "</a>");
+				}				
+			} else {
+				sb.append("<span class=\"hidden\">" + p + "</span>");
 			}
-			
-			// 다음블록 : 마지막 블록이 아니면 다음블록이 있다
-			if(endPage != totalPage) {
-				sb.append("<a href=\"" + path + "?page=" + (endPage+1) + "\">▶</a>");
-			}
-			
-			return sb.toString();
+		}
+		
+		// 다음블록 : 마지막 블록이 아니면 다음블록이 있다
+		if(endPage < totalPage) {
+			sb.append("<a class=\"lnk\" href=\"" + path + "page=" + (endPage + 1) + "\">▶</a>");
+		} else {
+			sb.append("<span class=\"hidden\">▶</span>");
+		}
+		
+		sb.append("</div>");
+		
+		return sb.toString();
 		
 	}
 	
