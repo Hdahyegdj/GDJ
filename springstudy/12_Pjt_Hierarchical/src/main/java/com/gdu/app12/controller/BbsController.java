@@ -13,10 +13,10 @@ import com.gdu.app12.service.BbsService;
 
 @Controller
 public class BbsController {
-	
+
 	@Autowired
 	private BbsService bbsService;
-	
+
 	@GetMapping("/")
 	public String welcome() {
 		return "index";
@@ -45,7 +45,10 @@ public class BbsController {
 		return "redirect:/bbs/list";
 	}
 	
+	@PostMapping("/bbs/reply/add")
+	public String replyAdd(HttpServletRequest request) {
+		bbsService.addReply(request);
+		return "redirect:/bbs/list";
+	}
 	
-	
-
 }
