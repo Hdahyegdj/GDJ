@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
 		
 		
 		// 이메일을 보내는 사용자 정보
-		String username = "dahye931118@gmail.com";	
-		String password = "vcjigzgazmpxdtvh";
+		String username = "";	
+		String password = "";
 		
 		// 사용자 정보를 javax.mail.Session에 저장
 		Session session = Session.getInstance(properties, new Authenticator() {
