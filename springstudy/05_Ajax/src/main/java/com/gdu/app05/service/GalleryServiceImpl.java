@@ -12,7 +12,7 @@ public class GalleryServiceImpl implements GalleryService {
 
 	@Override
 	public ResponseEntity<byte[]> imageDisplay(String path, String filename) {
-
+		
 		File file = new File(path, filename);
 		
 		ResponseEntity<byte[]> entity = null;
@@ -22,7 +22,7 @@ public class GalleryServiceImpl implements GalleryService {
 			String contentType = Files.probeContentType(file.toPath());
 			
 			HttpHeaders header = new HttpHeaders();
-			header.add("Content-Type", contentType);	// images/jpeg
+			header.add("Content-Type", contentType);  // image/jpeg
 			
 			entity = new ResponseEntity<byte[]>( FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK );
 			
@@ -31,6 +31,7 @@ public class GalleryServiceImpl implements GalleryService {
 		}
 		
 		return entity;
+		
 	}
 
 }

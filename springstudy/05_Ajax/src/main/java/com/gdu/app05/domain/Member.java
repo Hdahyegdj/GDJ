@@ -5,6 +5,9 @@ public class Member {
 	private String id;
 	private String pw;
 	
+	public Member() {
+		
+	}
 	public Member(String id, String pw) {
 		super();
 		this.id = id;
@@ -23,11 +26,5 @@ public class Member {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	
-	
-	
-
-	
-	
 	
 }

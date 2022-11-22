@@ -9,5 +9,5 @@ import com.gdu.app05.domain.Board;
 public interface BoardService {
 	public ResponseEntity<Board> execute1(HttpServletRequest request);
 	public ResponseEntity<Board> execute2(String title, String content);
-	public ResponseEntity<Board> execute3(Board board);
+	public ResponseEntity<Board> execute3(Board board);	
 }

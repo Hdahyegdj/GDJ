@@ -1,7 +1,7 @@
 package com.gdu.app05.domain;
 
 public class Contact {
-	
+
 	private String name;
 	private String tel;
 	
@@ -26,5 +26,5 @@ public class Contact {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
+	
 }

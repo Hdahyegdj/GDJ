@@ -37,8 +37,6 @@
 	<div>
 		<a href="${contextPath}/gallery">갤러리가기</a>
 	</div>
-	
-	
 
 </body>
 </html>

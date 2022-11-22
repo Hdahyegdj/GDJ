@@ -40,20 +40,19 @@
 				/* 응답 */
 				dataType: 'json',
 				success: function(resData){
-					$('<ul>')		/* ul을 만듦 */
+					$('<ul>')
 					.append( $('<li>').text(resData.title) )
 					.append( $('<li>').text(resData.content) )
-					.appendTo('#result');	  /* append가 자식, appendTo는 부모 */
+					.appendTo('#result');
 				},
 				error: function(jqXHR){
-					#$('#result').text(jqXHR.status);
+					$('#result').text(jqXHR.status);
 				}
-				
-			});	  // ajax
+			});  // ajax
 			
-		});	   // click
+		});  // click
 		
-	}	// function
+	}  // function
 	
 	function fn_ajax2(){
 		
@@ -95,7 +94,7 @@
 				/* 요청 */
 				type: 'get',
 				url: '${contextPath}/board/detail3',
-				data: $('#frm_board').serialize(),	
+				data: $('#frm_board').serialize(),
 				/* 응답 */
 				success: function(resData){
 					$('<ul>')
@@ -106,13 +105,13 @@
 				error: function(jqXHR){
 					if(jqXHR.status == 500){
 						alert('제목은 필수입니다.');
-					}	
+					}
 				}
-			});	  // ajax
+			});  // ajax
 			
-		});	   // click
+		});  // click
 		
-	}	// function
+	}  // function
 	
 </script>
 </head>
@@ -141,6 +140,6 @@
 	<hr>
 	
 	<div id="result"></div>
-
+	
 </body>
 </html>

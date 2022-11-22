@@ -1,20 +1,19 @@
 package com.gdu.app05.domain;
 
 public class Board {
-	
+
 	private String title;
 	private String content;
 	
 	public Board() {
 		
 	}
-
 	public Board(String title, String content) {
 		super();
 		this.title = title;
 		this.content = content;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
@@ -28,7 +27,4 @@ public class Board {
 		this.content = content;
 	}
 	
-	
-	
-
 }

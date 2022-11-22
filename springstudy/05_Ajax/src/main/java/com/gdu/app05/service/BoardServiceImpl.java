@@ -17,10 +17,11 @@ public class BoardServiceImpl implements BoardService {
 		안녕. 난 Ajax 응답 데이터를 만들기 위한 전용 클래스야.
 		
 		new ResponseEntity<T>(T body, HttpHeaders header, HttpStatus status)
-		1) T bod            y : 실제 응답할 데이터
+		1) T body             : 실제 응답할 데이터
 		2) HttpHeaders header : 응답 헤더
-		3) HttpStatus status  : 응답 코드(200, 400, 500 등)
-	*/
+		3) HttpStatus status  : 응답 코드(200, 404, 500 등)
+	*/	
+	
 	
 	@Override
 	public ResponseEntity<Board> execute1(HttpServletRequest request) {
@@ -32,10 +33,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		ResponseEntity<Board> entity = null;
 		if(title.isEmpty()) {
-			entity = new ResponseEntity<Board>(board, HttpStatus.INTERNAL_SERVER_ERROR); 	// $.ajax()의 error에서 처리
+			entity = new ResponseEntity<Board>(board, HttpStatus.INTERNAL_SERVER_ERROR);  // $.ajax()의 error에서 처리
 		} else {
 			board = new Board(title, content);
-			entity = new ResponseEntity<Board>(board, HttpStatus.OK);	// $.ajax()의 success에서 처리
+			entity = new ResponseEntity<Board>(board, HttpStatus.OK);  // $.ajax()의 success에서 처리
 		}
 		
 		return entity;
@@ -57,6 +58,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		return entity;
+		
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 		return entity;
+		
 	}
 
 }

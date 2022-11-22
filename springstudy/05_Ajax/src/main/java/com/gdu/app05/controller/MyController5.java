@@ -13,19 +13,21 @@ import com.gdu.app05.service.GalleryService;
 public class MyController5 {
 
 	
-	@GetMapping("gallery")	  // 반환이 void인 경우 mapping을 뷰(JSP)로 인식한다.
+	@GetMapping("gallery")  // 반환이 void인 경우 mapping을 뷰(JSP)로 인식한다.
 	public void gallery() {
 		
 	}
+	
 	
 	@Autowired
 	private GalleryService galleryService;
 	
 	
 	@ResponseBody
-	@GetMapping("image/display")	
+	@GetMapping("image/display")
 	public ResponseEntity<byte[]> display(@RequestParam String path, @RequestParam String filename) {
 		return galleryService.imageDisplay(path, filename);
 	}
+	
 	
 }

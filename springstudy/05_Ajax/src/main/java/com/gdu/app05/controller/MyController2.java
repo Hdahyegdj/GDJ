@@ -18,12 +18,9 @@ public class MyController2 {
 
 	@GetMapping("board")
 	public String board() {
-		return "board";		// board.jsp로 fwd
+		return "board";  // board.jsp로 forward
 	}
 	
-	
-	// BoardServiceImpl의
-	// execute1() 메소드 호출
 	
 	@Autowired
 	private BoardService boardService;
@@ -49,22 +46,5 @@ public class MyController2 {
 	public ResponseEntity<Board> detail3(Board board){
 		return boardService.execute3(board);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

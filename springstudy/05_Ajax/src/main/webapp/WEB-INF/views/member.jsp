@@ -17,22 +17,21 @@
 	 	width: 80px;
 	 }
 </style>
-<script src="${contextPath}/resources/js/jquery-3.6.1.min.js"></script>		<!-- jquery추가 -->
+<script src="${contextPath}/resources/js/jquery-3.6.1.min.js"></script>
 <script>
-
+	
 	$(document).ready(function(){
 		$('#btn1').click(function(){ fn_ajax1(); });
 		$('#btn2').click(function(){ fn_ajax2(); });
 		$('#btn3').click(function(){ fn_ajax3(); });
-		$('#btn4').click(function(){ fn_ajax4(); });
 	});
 	
-	function fn_ajax1() {
+	function fn_ajax1(){
 		
 		$('#result').empty();
 		
 		$.ajax({
-			/* 요청 */  /* 요청 타입이 get이므로 controller에서 getmapping사용 */
+			/* 요청 */
 			type: 'get',
 			url: '${contextPath}/member/detail1',
 			data: 'id=' + $('#id').val() + '&pw=' + $('#pw').val(),
@@ -44,11 +43,11 @@
 			error: function(jqXHR){
 				$('#result').text(jqXHR.responseText);
 			}
-		});	  // ajax
+		});  // ajax
 		
-	}	// function
-	
-	function fn_ajax2() {
+	}  // function
+
+	function fn_ajax2(){
 		
 		$('#result').empty();
 		
@@ -56,9 +55,9 @@
 			/* 요청 */
 			type: 'get',
 			url: '${contextPath}/member/detail2',
-			data: $('#frm_member').serialize(),		/* 1번과 동일하게 동작 */
+			data: $('#frm_member').serialize(),
 			/* 응답 */
-			dataType: "json",
+			dataType: 'json',
 			success: function(resData){
 				var ul = '<ul>';
 				ul += '<li>' + resData.id + '</li>';
@@ -68,12 +67,12 @@
 			},
 			error: function(jqXHR){
 				$('#result').text(jqXHR.responseText);
-			}		
-		});	  // ajax
+			}
+		});  // ajax
 		
-	}	// function
+	}  // function
 	
-	function fn_ajax3() {
+	function fn_ajax3(){
 		
 		$('#result').empty();
 		
@@ -91,9 +90,9 @@
 				ul += '</ul>';
 				$('#result').html(ul);
 			}
-		});   // ajax
+		});  // ajax
 		
-	}	// function
+	}  // function
 	
 </script>
 </head>
@@ -115,7 +114,6 @@
 			<input type="button" value="전송1" id="btn1">
 			<input type="button" value="전송2" id="btn2">
 			<input type="button" value="전송3" id="btn3">
-			<input type="button" value="전송4" id="btn4">
 		</div>
 		
 	</form>
@@ -123,6 +121,6 @@
 	<hr>
 	
 	<div id="result"></div>
-
+	
 </body>
 </html>
