@@ -16,7 +16,7 @@
 		parameter로 전달되는 UploadDTO의 uploadNo에 넣어 주시오.
 	 -->
 	<insert id="insertUpload" parameterType="UploadDTO">
-		<selectKey keyProperty="uploadNo" resultType="int" order="BEFORE">	  <!-- 해당 반환값은 parameterType의 UploadDTO로 들어감 -->
+		<selectKey keyProperty="uploadNo" resultType="int" order="BEFORE">
 			SELECT UPLOAD_SEQ.NEXTVAL
 			  FROM DUAL
 		</selectKey>
@@ -45,42 +45,42 @@
 		 WHERE UPLOAD_NO = #{uploadNo}
 	</select>
 	
-	<update id="updateDownLoadCnt" parameterType="int">
+	<update id="updateDownloadCnt" parameterType="int">
 		UPDATE ATTACH
 		   SET DOWNLOAD_CNT = DOWNLOAD_CNT + 1
-		 WHERE ATTACH_NO = #[attachNo]
+		 WHERE ATTACH_NO = #{attachNo}
 	</update>
 	
-	<select id="selectAttachByNo" parameterType="int" resultType="AttachDTO">		<!-- 다운로드 경로, 특정 파일 확인 -->
+	<select id="selectAttachByNo" parameterType="int" resultType="AttachDTO">
 		SELECT ATTACH_NO, PATH, ORIGIN, FILESYSTEM, DOWNLOAD_CNT, UPLOAD_NO
 		  FROM ATTACH
-		 WHERE ATTACH_NO = #[attachNo]
+		 WHERE ATTACH_NO = #{attachNo}
 	</select>
 	
-	<delete id="deleteAttachByNo" parameterType="int">
+	<update id="updateUpload" parameterType="UploadDTO">
+		UPDATE UPLOAD
+		   SET TITLE = #{title}
+		     , CONTENT = #{content}
+		     , MODIFY_DATE = SYSTIMESTAMP
+		 WHERE UPLOAD_NO = #{uploadNo}
+	</update>
+	
+	<delete id="deleteAttach" parameterType="int">
 		DELETE
 		  FROM ATTACH
 		 WHERE ATTACH_NO = #{attachNo}
 	</delete>
 	
+	<delete id="deleteUpload" parameterType="int">
+		DELETE
+		  FROM UPLOAD
+		 WHERE UPLOAD_NO = #{uploadNo}
+	</delete>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<select id="selectAttachListInYesterday" resultType="AttachDTO">
+		SELECT ATTACH_NO, PATH, ORIGIN, FILESYSTEM, DOWNLOAD_CNT, UPLOAD_NO
+		  FROM ATTACH
+		 WHERE PATH = CONCAT('storage\\', TO_CHAR(SYSDATE - 1, 'yyyy\\mm\\dd'))
+	</select>
 	
 </mapper>
