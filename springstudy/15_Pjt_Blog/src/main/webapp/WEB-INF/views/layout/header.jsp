@@ -7,7 +7,6 @@
 	pageContext.setAttribute("title", title);	// EL사용을 위함 (${title})
 	pageContext.setAttribute("contextPath", request.getContextPath());
 %>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -21,5 +20,5 @@
 <body>
 
 	<div>
-		<h1>Welcome to my BLOG</h1>
+		<h1>Welcome To My BLOG</h1>
 	</div>

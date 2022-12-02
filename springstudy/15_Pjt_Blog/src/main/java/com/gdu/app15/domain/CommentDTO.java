@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class CommentDTO {
-	private int commentNo;
-	private long blogNo;
-	private String content;
+	private int commentNo;		// seq
+	private int blogNo;			// form
+	private String content;		// form
 	private int state;
 	private int depth;
 	private int groupNo;

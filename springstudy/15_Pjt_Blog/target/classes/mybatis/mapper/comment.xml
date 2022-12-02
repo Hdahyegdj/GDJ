@@ -6,6 +6,40 @@
 
 <mapper namespace="com.gdu.app15.mapper.CommentMapper">
 
-
+	<select id="selectCommentCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		  FROM COMMENTS
+		 WHERE BLOG_NO = #{blogNo}
+	</select>
+	
+	<insert id="insertComment" parameterType="CommentDTO">	<!-- 댓글 -->
+		INSERT INTO COMMENTS
+			(COMMENT_NO, BLOG_NO, CONTENT, STATE, DEPTH, GROUP_NO, CREATE_DATE)
+		VALUES
+			(COMMENTS_SEQ.NEXTVAL, #{blogNo}, #{content}, 1, 0, COMMENTS_SEQ.CURRVAL, SYSDATE)
+	</insert>
+	
+	<select id="selectCommentList" parameterType="Map" resultType="CommentDTO">    <!-- 같은 번호 일 때, 답글은 DEPTH기준 오름차순 정렬 -->
+		SELECT A.ROW_NUM, A.COMMENT_NO, A.BLOG_NO, A.CONTENT, A.STATE, A.DEPTH, A.GROUP_NO, A.CREATE_DATE
+		  FROM (SELECT ROW_NUMBER() OVER(ORDER BY GROUP_NO DESC, DEPTH ASC, CREATE_DATE DESC) AS ROW_NUM, COMMENT_NO, BLOG_NO, CONTENT, STATE, DEPTH, GROUP_NO, CREATE_DATE
+		          FROM COMMENTS
+		         WHERE BLOG_NO = #{blogNo}) A
+		 WHERE A.ROW_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<update id="deleteComment" parameterType="int">		<!-- DB와 동일하게 삭제는 UPDATE를 써서 사용 -->
+		UPDATE COMMENTS
+		   SET STATE = -1
+		 WHERE COMMENT_NO = #{commentNo}
+	</update>
+	
+	<insert id="insertReply" parameterType="CommentDTO">	<!-- 답글(depth값 변경) -->
+		INSERT INTO COMMENTS
+			(COMMENT_NO, BLOG_NO, CONTENT, STATE, DEPTH, GROUP_NO, CREATE_DATE)
+		VALUES
+			(COMMENTS_SEQ.NEXTVAL, #{blogNo}, #{content}, 1, 1, #{groupNo}, SYSDATE)
+	</insert>
+	
+	
 	
 </mapper>
