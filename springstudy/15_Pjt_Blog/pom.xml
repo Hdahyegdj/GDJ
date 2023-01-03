@@ -210,5 +210,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${finalName}</finalName>
     </build>
 </project>
